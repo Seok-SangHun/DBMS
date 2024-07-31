@@ -154,10 +154,42 @@ VALUES(SEQ_ORDER.NEXTVAL, '2000-10-18', '1','3');
 INSERT INTO TBL_ORDER
 VALUES(SEQ_ORDER.NEXTVAL, '2000-11-18', '2','2');
 
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+CREATE TABLE TBL_OWNER(
+    ID NUMBER CONSTRAINT PK_OWNER PRIMARY KEY,
+    OWNER_NAME VARCHAR2(1000) NOT NULL,
+    OWNER_AGE NUMBER NOT NULL,
+    OWNER_PHONE VARCHAR2(15) NOT NULL,
+    OWNER_ADDRESS VARCHAR2(2000) NOT NULL
+);
 
+CREATE TABLE TBL_SHELTER(
+    ID NUMBER CONSTRAINT PK_SHELTER PRIMARY KEY,
+    SHELTER_NAME VARCHAR2(1000) NOT NULL,
+    SHELTER_ADDRESS VARCHAR2(2000) NOT NULL,
+    SHELTER_PHONE VARCHAR2(15) NOT NULL
+);
 
+CREATE TABLE TBL_ANIMALS(
+    ID NUMBER CONSTRAINT PK_ANIMALS PRIMARY KEY,
+    ANIMAL_DISEASE VARCHAR2(2000), /*보호소에서 올 수도 있어서 NN 사용 안함*/
+    ANIMAL_NAME VARCHAR2(1000) NOT NULL,
+    ANIMAL_AGE NUMBER NOT NULL,
+    ANIMAL_WEIGHT NUMBER NOT NULL,
+    OWNER_ID NUMBER,
+    SHELTER_ID NUMBER,
+    CONSTRAINT FK_ANIMALS_OWNER FOREIGN KEY(OWNER_ID)
+    REFERENCES TBL_OWNER(ID),
+    CONSTRAINT FK_ANIMALS_SHELTER FOREIGN KEY(SHELTER_ID)
+    REFERENCES TBL_SHELTER(ID)
+);
 
-
+CREATE SEQUENCE SEQ_OWNER;
 
 
 
